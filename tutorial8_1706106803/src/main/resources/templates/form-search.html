@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Search student</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h2 th:text=" 'Login as ' + ${#httpServletRequest.remoteUser}">Login as</h2>
+    <form th:action="@{/logout}" method="post">
+    	<input type="submit" value="Sign Out"/>
+    </form>
+	<h1 class="page-header">Searching Data Student by NPM</h1>
+
+	<form action="/student/view" >
+		<div>
+			<label for="npm">NPM</label> <input type="text" name="npm" />
+		</div>
+		<div>
+			<button type="submit" name="action" value="search">Search</button>
+		</div>
+	</form>
+	<div th:replace="fragments/fragment_2 :: footer"></div>
+</body>
+
+</html>
+

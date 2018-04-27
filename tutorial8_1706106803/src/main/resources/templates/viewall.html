@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!--<title>View All Students</title>-->
+        <title th:replace="fragments/fragment :: header(title=${title})"></title>
+        <script src="/DataTables/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/DataTables/DataTables-1.10.16/css/jquery.dataTables.css" />
+        <script type="text/javascript" src="/DataTables/DataTables-1.10.16/js/jquery.dataTables.js"></script>
+    </head>
+    <body>
+    <h2 th:text=" 'Login as ' + ${#httpServletRequest.remoteUser}">Login as</h2>
+    <form th:action="@{/logout}" method="post">
+    	<input type="submit" value="Sign Out"/>
+    </form>
+    	<center>
+       		<h1>All Students</h1>
+       	</center>
+       	<table class="table display dataTable" id="example" style="width:75%" role="grid" >
+       		<thead class="thead-dark">
+	       		<tr role="row">
+	       			<th style="width:50px;">No</th>
+	       			<th style="width:70px;">NPM</th>
+	       			<th style="width:160px;">Name</th>
+	       			<th style="width:90px;">GPA</th>
+	       			<th style="width:147px;">Cum Laude</th>
+	       			<th colspan="2" style="width:90px;">Action</th>
+	       		</tr>
+	       	</thead>	
+       		<tbody>
+   				<tr th:each="student,iterationStatus: ${students}">
+   					<td th:text="${iterationStatus.count}"></td>
+   					<td th:text="${student.npm}"></td>
+   					<td th:text="${student.name}"></td>
+   					<td th:text="${student.gpa}"></td>
+   					<td th:if="${student.gpa >=3.49}">Cum Laude
+   					<td th:unless="${student.gpa >=3.49}">Sangat Memuaskan
+   					</td>
+   					<td><a th:href="'/student/update/' + ${student.npm}">Update</a>
+   					<td><a th:href="'/student/delete/' + ${student.npm}">Delete</a></td>
+   				</tr>
+       	</table>
+       	<div th:replace="fragments/fragment :: footer"></div>
+       	<script>
+		    $(document).ready(function() {
+		    	$('#example').DataTable({
+			        "info":     false
+			    	});
+		    } );
+	    </script>
+    </body>
+</html>

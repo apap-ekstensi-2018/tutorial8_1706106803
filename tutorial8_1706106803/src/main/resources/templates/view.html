@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- <title>View Student by NPM</title> -->
+        <title th:replace="fragments/fragment_2 :: header(title=${title})"></title>
+    </head>
+    <body>
+    <h2 th:text=" 'Login as ' + ${#httpServletRequest.remoteUser}">Login as</h2>
+    <form th:action="@{/logout}" method="post">
+    	<input type="submit" value="Sign Out"/>
+    </form>
+       	<h3 th:text="'NPM = ' + ${student.npm}">Student NPM</h3>
+       	<h3 th:text="'Name = ' + ${student.name}">Student Name</h3>
+       	<h3 th:text="'GPA = ' + ${student.gpa}">Student GPA</h3>
+       	<div th:replace="fragments/fragment :: footer"></div>
+    </body>
+</html>
+
